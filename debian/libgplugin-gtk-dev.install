@@ -1,0 +1,5 @@
+#!/usr/bin/dh-exec
+usr/include/gplugin-1.0/gplugin-gtk
+usr/include/gplugin-1.0/gplugin-gtk.h
+usr/lib/${DEB_HOST_MULTIARCH}/libgplugin-gtk.so
+usr/lib/${DEB_HOST_MULTIARCH}/pkgconfig/gplugin-gtk.pc

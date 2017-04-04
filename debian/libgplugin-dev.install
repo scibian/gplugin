@@ -1,0 +1,6 @@
+#!/usr/bin/dh-exec
+usr/include/gplugin-1.0/gplugin
+usr/include/gplugin-1.0/gplugin.h
+usr/include/gplugin-1.0/gplugin-native.h
+usr/lib/${DEB_HOST_MULTIARCH}/libgplugin.so
+usr/lib/${DEB_HOST_MULTIARCH}/pkgconfig/gplugin.pc
