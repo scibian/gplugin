@@ -1,0 +1,19 @@
+GPlugin uses hgflow[1] for development.  All development takes place on the
+develop branch which leaves default to be a stable release clone.  All long
+term feature/bug fix work should take place on a feature branch that when
+closed, gets merged to develop.
+
+Releases are forked from develop and create a new branch for any testing/bug
+fixes.  When a release is deemed done, it's merged back into develop and into
+default.  hgflow takes care of all of this for us.
+
+To add a feature please fork https://bitbucket.org/gplugin/main.  Then clone
+your fork.  Once you have your fork cloned and hgflow setup and installed, type
+
+  hg flow feature start $NAME_OF_YOUR_FEATURE$
+
+This will create a new branch for you to do your work on.  When you submit a
+pull request, make sure it's this branch that you're requesting I pull.
+
+[1] https://bitbucket.org/yujiewu/hgflow
+

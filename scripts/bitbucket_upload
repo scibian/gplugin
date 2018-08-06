@@ -1,0 +1,70 @@
+#!/bin/sh
+
+CURL=$(which curl)
+GREP=$(which grep)
+AWK=$(which awk)
+
+OUTPUT=.bitbucket.cookies
+
+rm -f ${OUTPUT}
+
+PATH=${1}
+FILES=${@}
+
+if [ -z ${PATH} ] ; then
+	echo "You must provide a repository path"
+	exit 1
+fi
+
+if [ -z "${FILES}" ] ; then
+	echo "You must provide at least one file to upload"
+	exit 1
+fi
+
+BASE_URI=https://bitbucket.org
+LOGIN_URI=${BASE_URI}/account/signin/
+UPLOAD_URI=${BASE_URI}/${PATH}/downloads
+
+read -e -p "bitbucket username: " BB_USERNAME
+read -e -s -p "bitbucket password: " BB_PASSWORD
+echo
+echo
+
+# get the csrf token
+echo -n "getting login token ... "
+${CURL} -s -k -c ${OUTPUT} -o /dev/null ${LOGIN_URI}
+CSRF_TOKEN=$(${GREP} csrftoken ${OUTPUT} | ${AWK} '{print $7}')
+if [ -z ${CSRF_TOKEN} ] ; then
+	echo "failed."
+	rm -f ${OUTPUT}
+	exit 1
+else
+	echo "done"
+fi
+
+
+echo -n "logging in ... "
+${CURL} -s -k -c ${OUTPUT} -b ${OUTPUT} -o /dev/null -d "username=${BB_USERNAME}&password=${BB_PASSWORD}&csrfmiddlewaretoken=${CSRF_TOKEN}" --referer ${LOGIN_URI} -L ${LOGIN_URI}
+${GREP} -q bb_session ${OUTPUT}
+if [ $? -ne 0 ] ; then
+	echo "failed"
+	rm -f ${OUTPUT}
+	exit 1
+else
+	echo "done"
+fi
+
+for FILE in ${FILES} ; do
+	echo -n "uploading ${FILE} ... "
+	${CURL} -s -k -c ${OUTPUT} -b ${OUTPUT}  --referer ${UPLOAD_URI} -L --form csrfmiddlewaretoken=${CSRF_TOKEN} --form token= --form file=@"${FILE}" ${UPLOAD_URI}
+	if [ $? -ne 0 ] ; then
+		echo "failed"
+		rm -f ${OUTPUT}
+		exit 1
+	else
+		echo "done"
+	fi
+done
+
+exit 0
+

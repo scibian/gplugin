@@ -1,0 +1,49 @@
+/*
+ * Copyright (C) 2011-2013 Gary Kramlich <grim@reaperworld.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+#ifndef __GI_SCANNER__ /* hide this bit from g-ir-scanner */
+#if !defined(GPLUGIN_GLOBAL_HEADER_INSIDE) && !defined(GPLUGIN_COMPILATION)
+#error "only <gplugin.h> may be included directly"
+#endif
+#endif /* __GI_SCANNER__ */
+
+#ifndef GPLUGIN_VERSION_H
+#define GPLUGIN_VERSION_H
+
+#define GPLUGIN_MAJOR_VERSION (@GPLUGIN_MAJOR_VERSION@)
+#define GPLUGIN_MINOR_VERSION (@GPLUGIN_MINOR_VERSION@)
+#define GPLUGIN_MICRO_VERSION (@GPLUGIN_MICRO_VERSION@)
+#define GPLUGIN_EXTRA_VERSION "@GPLUGIN_EXTRA_VERSION@"
+
+#define GPLUGIN_VERSION       "@GPLUGIN_VERSION@"
+
+#define GPLUGIN_VERSION_CHECK(x,y,z) \
+	((x) == GPLUGIN_MAJOR_VERSION && \
+	 ((y) < GPLUGIN_MINOR_VERSION || \
+	  ((y) == GPLUGIN_MINOR_VERSION && (z) <= GPLUGIN_MICRO_VERSION)))
+
+#include <glib.h>
+
+G_BEGIN_DECLS
+
+typedef gint (*GPluginVersionCompareFunc)(const gchar *v1, const gchar *v2, GError **error);
+
+gint gplugin_version_compare(const gchar *v1, const gchar *v2, GError **error);
+
+G_END_DECLS
+
+#endif /* GPLUGIN_VERSION_H */
+

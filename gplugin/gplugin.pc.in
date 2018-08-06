@@ -1,0 +1,13 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+libdir=${prefix}/lib
+includedir=${prefix}/include/gplugin-1.0/
+
+plugindir=@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_LIBDIR@
+
+Name: libgplugin
+Description: A fully featured GModule based plugin library
+Version: @GPLUGIN_VERSION@
+Requires: glib-2.0 gobject-2.0 gmodule-2.0
+Libs: -L${libdir} -lgplugin
+Cflags: -I${includedir}
+

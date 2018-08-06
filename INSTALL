@@ -1,0 +1,41 @@
+Dependencies
+============
+GPlugin depends on the following at a bare minimum:
+	glib-2.0 >= 2.20.0
+	gobject-introspection, libgirepository1.0-dev
+	cmake >= 2.8
+	gettext
+	help2man
+	a C compiler
+
+A full build (enabled by default) depends on the following:
+	gtk-3
+	python3-dev, python-gi-dev, python3-gi
+	liblua5.1-0-dev, lua-lgi
+	xsltproc
+
+All of these packages and their development headers need to be installed
+prior to building GPlugin.
+
+Building
+========
+GPlugin uses CMake (http://www.cmake.org) as its build system.  As such
+compiling is a little bit different than your typical ./configure, make,
+sudo make install.  But luckily for you, not too much different.
+
+While it is not required, it is highly recommended that you use a separate
+build dir.  As such, these instructions use a separate build directory.
+
+To compile you need to run the following commands:
+
+	mkdir build
+	cd build
+	cmake ..
+	make
+	sudo make install
+
+If you want/need to tweak the build system (to enable/disable certain loaders)
+you can do so at any time by using a CMake user interface.  For example, if you
+have the CMake curses gui installed, you can do this by running "ccmake .."
+from the build directory.
+

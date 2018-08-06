@@ -1,0 +1,13 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+libdir=${prefix}/lib
+includedir=${prefix}/include/gplugin-1.0/
+
+plugindir=${libdir}
+
+Name: libgplugin-gtk
+Description: Gtk+ widgets for GPlugin
+Version: @GPLUGIN_VERSION@
+Requires: glib-2.0 gobject-2.0 gmodule-2.0 gplugin
+Libs: -L${libdir} -lgplugin-gtk
+Cflags: -I${includedir}
+

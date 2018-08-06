@@ -1,0 +1,12 @@
+add_test_plugin(super-dependent)
+add_test_plugin(no-version)
+add_test_plugin(exact1)
+add_test_plugin(exact2)
+add_test_plugin(greater)
+add_test_plugin(greater-equal)
+add_test_plugin(less)
+add_test_plugin(less-equal)
+add_test_plugin(bar)
+add_test_plugin(baz)
+add_test_plugin(fez)
+
